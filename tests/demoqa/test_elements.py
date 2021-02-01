@@ -3,6 +3,8 @@ from playwright.sync_api import Page
 from playwright.sync_api._generated import ElementHandle
 from pytest import fixture
 
+from pages.text_box import TextBoxPage
+
 base_url: str = "https://www.demoqa.com"
 
 
@@ -47,21 +49,10 @@ class TestTextBox:
 
         :param page: A Playwright browser page.
         """
-        page.goto(f"{base_url}/text-box")
-        user_form: ElementHandle = page.wait_for_selector("#userForm")
-        username_field: ElementHandle = user_form.wait_for_selector("#userName")
-        email_field: ElementHandle = user_form.wait_for_selector("#userEmail")
-        current_address_field: ElementHandle = user_form.wait_for_selector(
-            "#currentAddress"
-        )
-        permanent_address_field: ElementHandle = user_form.wait_for_selector(
-            "#permanentAddress"
-        )
-
-        username_field.fill(self.user["name"])
-        email_field.fill(self.user["email"])
-        current_address_field.fill(self.user["currentAddress"])
-        permanent_address_field.fill(self.user["permanentAddress"])
+        text_box_page = TextBoxPage(page)
+        
+        text_box_page.navigate()
+        text_box_page.fill_form(self.user)
 
         page.click("#submit")
 
