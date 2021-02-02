@@ -29,13 +29,18 @@ class TextBoxPage(object):
 
     @property
     def submit_button(self) -> ElementHandle:
-        return self.page.wait_for_selector('#submit')
+        return self.page.wait_for_selector("#submit")
 
     def fill_form(self, user: dict) -> None:
+        """Fill out a Text Box page form.
+
+        :param user: A test user.
+        """
         self.username_field.fill(user["name"])
         self.email_field.fill(user["email"])
         self.current_address_field.fill(user["currentAddress"])
         self.permanent_address_field.fill(user["permanentAddress"])
 
     def navigate(self) -> None:
+        """Navigate to the Text Box page."""
         self.page.goto(f"{base_url}/text-box")
