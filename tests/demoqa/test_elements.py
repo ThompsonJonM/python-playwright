@@ -54,7 +54,7 @@ class TestTextBox:
         text_box_page.navigate()
         text_box_page.fill_form(self.user)
 
-        page.click("#submit")
+        text_box_page.submit_button.click()
 
         output_field: ElementHandle = page.wait_for_selector("#output")
         for key, value in self.user.items():
@@ -68,15 +68,14 @@ class TestTextBox:
 
         :param page: A Playwright browser page.
         """
-        page.goto(f"{base_url}/text-box")
-        user_form: ElementHandle = page.wait_for_selector("#userForm")
-        email_field: ElementHandle = user_form.wait_for_selector("#userEmail")
+        text_box_page = TextBoxPage(page)
+        
+        text_box_page.navigate()
+        text_box_page.email_field.fill("test")
 
-        email_field.fill("test")
+        text_box_page.submit_button.click()
 
-        page.click("#submit")
-
-        email_class: str = user_form.eval_on_selector(
+        email_class: str = text_box_page.user_form.eval_on_selector(
             "#userEmail", "el => el.className"
         )
         assert "field-error" in email_class

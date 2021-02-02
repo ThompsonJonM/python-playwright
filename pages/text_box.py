@@ -27,6 +27,10 @@ class TextBoxPage(object):
     def permanent_address_field(self) -> ElementHandle:
         return self.user_form.wait_for_selector("#permanentAddress")
 
+    @property
+    def submit_button(self) -> ElementHandle:
+        return self.page.wait_for_selector('#submit')
+
     def fill_form(self, user: dict) -> None:
         self.username_field.fill(user["name"])
         self.email_field.fill(user["email"])
