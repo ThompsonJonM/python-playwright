@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from playwright.sync_api._generated import ElementHandle
 from pytest import fixture
 
-from pages.text_box import TextBoxPage
+from pages import TextBoxPage, ButtonsPage
 
 base_url: str = "https://www.demoqa.com"
 
@@ -97,15 +97,16 @@ class TestButtons:
         :param page: A Playwright browser page.
         """
         click_action, result = button_type
+        buttons_page = ButtonsPage(page)
 
-        page.goto(f"{base_url}/buttons")
+        buttons_page.navigate()
 
         if click_action == "Double Click":
-            page.dblclick("#doubleClickBtn")
+            buttons_page.double_click_button.dblclick()
         elif click_action == "Right Click":
-            page.click("#rightClickBtn", button="right")
+            buttons_page.right_click_button.click(button="right")
         else:
-            page.click('button >> text="Click Me"')
+            buttons_page.dynamic_click_button.click()
 
         message: ElementHandle = page.is_visible(f"#{result}")
 
