@@ -8,6 +8,7 @@ from pages import TextBoxPage, ButtonsPage
 base_url: str = "https://www.demoqa.com"
 
 
+@pytest.mark.elements
 class TestBase:
     def test_visit_elements_page(self, page: Page):
         """Test that the Elements page can be navigated to.
@@ -36,6 +37,8 @@ class TestBase:
         assert "show" not in element_list_class
 
 
+@pytest.mark.elements
+@pytest.mark.text_box
 class TestTextBox:
     user: dict = {
         "name": "Test Tester",
@@ -50,7 +53,7 @@ class TestTextBox:
         :param page: A Playwright browser page.
         """
         text_box_page = TextBoxPage(page)
-        
+
         text_box_page.navigate()
         text_box_page.fill_form(self.user)
 
@@ -69,7 +72,7 @@ class TestTextBox:
         :param page: A Playwright browser page.
         """
         text_box_page = TextBoxPage(page)
-        
+
         text_box_page.navigate()
         text_box_page.email_field.fill("test")
 
@@ -81,6 +84,8 @@ class TestTextBox:
         assert "field-error" in email_class
 
 
+@pytest.mark.elements
+@pytest.mark.buttons
 class TestButtons:
     @pytest.mark.parametrize(
         "button_type",

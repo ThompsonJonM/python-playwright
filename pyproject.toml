@@ -1,0 +1,10 @@
+[tool.pytest.ini_options]
+markers = [
+    "asyncio: Asynchronous tests",
+    "elements: Elements page tests",
+    "text_box: Text Box component tests",
+    "buttons: Buttons component tests",
+]
+
+[tool.black]
+line-length = 79

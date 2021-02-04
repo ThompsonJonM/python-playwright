@@ -7,6 +7,7 @@ base_url: str = "https://www.demoqa.com"
 
 
 @pytest.mark.asyncio
+@pytest.mark.elements
 class TestBase:
     async def test_visit_elements_page(self) -> None:
         """Test that the Elements page can be navigated to.
@@ -44,6 +45,8 @@ class TestBase:
 
 
 @pytest.mark.asyncio
+@pytest.mark.elements
+@pytest.mark.text_box
 class TestTextBox:
     user: dict = {
         "name": "Test Tester",
@@ -61,16 +64,20 @@ class TestTextBox:
             browser = await playwright.chromium.launch()
             page = await browser.new_page()
             await page.goto(f"{base_url}/text-box")
-            user_form: ElementHandle = await page.wait_for_selector("#userForm")
+            user_form: ElementHandle = await page.wait_for_selector(
+                "#userForm"
+            )
             username_field: ElementHandle = await user_form.wait_for_selector(
                 "#userName"
             )
-            email_field: ElementHandle = await user_form.wait_for_selector("#userEmail")
-            current_address_field: ElementHandle = await user_form.wait_for_selector(
-                "#currentAddress"
+            email_field: ElementHandle = await user_form.wait_for_selector(
+                "#userEmail"
             )
-            permanent_address_field: ElementHandle = await user_form.wait_for_selector(
-                "#permanentAddress"
+            current_address_field: ElementHandle = (
+                await user_form.wait_for_selector("#currentAddress")
+            )
+            permanent_address_field: ElementHandle = (
+                await user_form.wait_for_selector("#permanentAddress")
             )
 
             await username_field.fill(self.user["name"])
@@ -80,7 +87,9 @@ class TestTextBox:
 
             await page.click("#submit")
 
-            output_field: ElementHandle = await page.wait_for_selector("#output")
+            output_field: ElementHandle = await page.wait_for_selector(
+                "#output"
+            )
             for key, value in self.user.items():
                 ele_value: str = await output_field.eval_on_selector(
                     f"#{key}", "el => el.innerText"
@@ -96,8 +105,12 @@ class TestTextBox:
             browser = await playwright.chromium.launch()
             page = await browser.new_page()
             await page.goto(f"{base_url}/text-box")
-            user_form: ElementHandle = await page.wait_for_selector("#userForm")
-            email_field: ElementHandle = await user_form.wait_for_selector("#userEmail")
+            user_form: ElementHandle = await page.wait_for_selector(
+                "#userForm"
+            )
+            email_field: ElementHandle = await user_form.wait_for_selector(
+                "#userEmail"
+            )
 
             await email_field.fill("test")
 
@@ -110,6 +123,8 @@ class TestTextBox:
 
 
 @pytest.mark.asyncio
+@pytest.mark.elements
+@pytest.mark.buttons
 class TestButtons:
     @pytest.mark.parametrize(
         "button_type",
