@@ -16,11 +16,12 @@ A testing repository using Python 3.9, Pytest, and Playwright.
 - Black
 - Isort
 - Pydocstyle
+- Pipenv
 
 ### Installation
-Prior to install, you should create a virtual environment using Python 3.9. Once created, source the virtual environment. Following activation, run the following in the directory root: `pip install requirements.txt`. This should install all requirements found in the text file.
+Converted to Pipenv to remove the dependency on virtualenv and pip. Simply install pipenv (`pip install pipenv`), then run `pipenv --python 3.9`. This will build a new virtual environment. Run `pipenv run shell` to activate the environment. Finally, run `pipenv install` to install all dependencies.
 
-To verify install, run `pytest --version`. It should read `6.2.2` per the requirements.
+It is likely that I will switch this over to Poetry as I have had great experience with the package. In addition, it uses `pyproject.toml` instead of `Pipfile` or `requirements.txt` for dependency management. 
 
 ### Running Tests
 Run the following commands:
