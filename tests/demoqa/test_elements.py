@@ -10,7 +10,7 @@ base_url: str = "https://www.demoqa.com"
 
 @pytest.mark.elements
 class TestBase:
-    def test_visit_elements_page(self, page: Page):
+    def test_visit_elements_page(self, page: Page) -> None:
         """Test that the Elements page can be navigated to.
 
         :param page: A Playwright browser page.
@@ -20,7 +20,7 @@ class TestBase:
 
         assert "Elements" in header_text
 
-    def test_collapse_elements_container(self, page: Page):
+    def test_collapse_elements_container(self, page: Page) -> None:
         """Test that the Elements container may be collapsed by a user.
 
         :param page: A Playwright browser page.
@@ -47,7 +47,7 @@ class TestTextBox:
         "permanentAddress": "24 Girard St, Rochester, NY 14610",
     }
 
-    def test_submit_valid_data(self, page: Page):
+    def test_submit_valid_data(self, page: Page) -> None:
         """Test that valid data may be submitted.
 
         :param page: A Playwright browser page.
@@ -66,7 +66,7 @@ class TestTextBox:
             )
             assert value in ele_value
 
-    def test_error_when_invalid_email(self, page: Page):
+    def test_error_when_invalid_email(self, page: Page) -> None:
         """Test that invalid data may not be submitted.
 
         :param page: A Playwright browser page.
@@ -87,18 +87,35 @@ class TestTextBox:
 @pytest.mark.elements
 @pytest.mark.check_box
 class TestCheckBox:
-    def test_expansion(self, page: Page):
-        """Test whether the checkbox list may be expanded
+    def test_expansion(self, page: Page) -> None:
+        """Test that the checkbox list may be expanded.
         
         :param page: A Playwright browser page.
         """
         check_box_component = CheckBox(page)
+
         check_box_component.navigate()
-
         check_box_component.expand_all_button.click()
-        list_class: str = check_box_component.check_box_list.evaluate('el => el.className')
 
+        list_class: str = check_box_component.check_box_list.evaluate('el => el.className')
         assert 'rct-node-expanded' in list_class
+
+    def test_select_check_box(self, page: Page) -> None:
+        """Test that a specific checkbox may be selected.
+
+        :param page: A Playwright browser page.
+        """
+        check_box: str = "notes"
+
+        check_box_component = CheckBox(page)
+
+        check_box_component.navigate()
+        check_box_component.expand_all_button.click()
+
+        check_box_component.check_box(text=check_box).click()
+
+        result: str = check_box_component.result_field.evaluate("el => el.innerText")
+        assert check_box in result
 
 
 @pytest.mark.elements
@@ -112,7 +129,7 @@ class TestButtons:
             ("Click", "dynamicClickMessage"),
         ],
     )
-    def test_click_types(self, button_type: fixture, page: Page):
+    def test_click_types(self, button_type: fixture, page: Page) -> None:
         """Test that specific click actions provide a result.
 
         :param button_type: A tuple containing click action and result.

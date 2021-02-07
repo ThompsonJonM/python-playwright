@@ -12,6 +12,10 @@ class CheckBox(object):
         return self.page.wait_for_selector(".react-checkbox-tree")
 
     @property
+    def check_box_list(self) -> ElementHandle:
+        return self.check_box_container.wait_for_selector('.rct-node.rct-node-parent')
+
+    @property
     def collapse_all_button(self) -> ElementHandle:
         return self.page.wait_for_selector("[title='Collapse all']")
 
@@ -20,8 +24,15 @@ class CheckBox(object):
         return self.page.wait_for_selector("[title='Expand all']")
 
     @property
-    def check_box_list(self) -> ElementHandle:
-        return self.check_box_container.wait_for_selector('.rct-node.rct-node-parent')
+    def result_field(self) -> ElementHandle:
+        return self.page.wait_for_selector("#result")
+
+    def check_box(self, text: str) -> ElementHandle:
+        """Select a checkbox based on a text node.
+        
+        :param text: The text for checkbox selection.
+        """
+        return self.check_box_list.wait_for_selector(f"[for='tree-node-{text}']")
 
     def navigate(self) -> None:
         """Navigate to the Check Box page."""
