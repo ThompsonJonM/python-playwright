@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from playwright.sync_api._generated import ElementHandle
 from pytest import fixture
 
-from pages import TextBoxPage, ButtonsPage
+from pages import TextBox, Buttons, CheckBox
 
 base_url: str = "https://www.demoqa.com"
 
@@ -52,7 +52,7 @@ class TestTextBox:
 
         :param page: A Playwright browser page.
         """
-        text_box_page = TextBoxPage(page)
+        text_box_page = TextBox(page)
 
         text_box_page.navigate()
         text_box_page.fill_form(self.user)
@@ -71,7 +71,7 @@ class TestTextBox:
 
         :param page: A Playwright browser page.
         """
-        text_box_page = TextBoxPage(page)
+        text_box_page = TextBox(page)
 
         text_box_page.navigate()
         text_box_page.email_field.fill("test")
@@ -82,6 +82,23 @@ class TestTextBox:
             "#userEmail", "el => el.className"
         )
         assert "field-error" in email_class
+
+
+@pytest.mark.elements
+@pytest.mark.check_box
+class TestCheckBox:
+    def test_expansion(self, page: Page):
+        """Test whether the checkbox list may be expanded
+        
+        :param page: A Playwright browser page.
+        """
+        check_box_component = CheckBox(page)
+        check_box_component.navigate()
+
+        check_box_component.expand_all_button.click()
+        list_class: str = check_box_component.check_box_list.evaluate('el => el.className')
+
+        assert 'rct-node-expanded' in list_class
 
 
 @pytest.mark.elements
@@ -102,7 +119,7 @@ class TestButtons:
         :param page: A Playwright browser page.
         """
         click_action, result = button_type
-        buttons_page = ButtonsPage(page)
+        buttons_page = Buttons(page)
 
         buttons_page.navigate()
 

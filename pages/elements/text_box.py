@@ -3,7 +3,7 @@ from playwright.sync_api._generated import ElementHandle
 base_url: str = "https://www.demoqa.com"
 
 
-class TextBoxPage(object):
+class TextBox(object):
     def __init__(self, page):
         self.page = page
 
