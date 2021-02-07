@@ -105,17 +105,22 @@ class TestCheckBox:
 
         :param page: A Playwright browser page.
         """
-        check_box: str = "notes"
+        check_box_text: str = "notes"
 
         check_box_component = CheckBox(page)
 
         check_box_component.navigate()
         check_box_component.expand_all_button.click()
 
-        check_box_component.check_box(text=check_box).click()
+        check_box: ElementHandle = check_box_component.check_box(text=check_box_text)
+        check_box.click()
+
+        icon: ElementHandle = check_box.wait_for_selector('.rct-icon-check')
+
+        visible: bool = icon.is_visible()
 
         result: str = check_box_component.result_field.evaluate("el => el.innerText")
-        assert check_box in result
+        assert visible and check_box_text in result
 
 
 @pytest.mark.elements

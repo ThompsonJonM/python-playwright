@@ -28,7 +28,7 @@ class CheckBox(object):
         return self.page.wait_for_selector("#result")
 
     def check_box(self, text: str) -> ElementHandle:
-        """Select a checkbox based on a text node.
+        """Returns a checkbox element based on text.
         
         :param text: The text for checkbox selection.
         """
