@@ -1,8 +1,7 @@
 import pytest
 
-from pages import Login, Profile
-
 from credentials import user
+from pages import Login, Profile
 
 
 @pytest.mark.bookstore
