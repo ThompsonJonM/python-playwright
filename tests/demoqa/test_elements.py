@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from playwright.sync_api._generated import ElementHandle
 from pytest import fixture
 
-from pages import TextBox, Buttons, CheckBox
+from pages import Buttons, CheckBox, TextBox
 
 base_url: str = "https://www.demoqa.com"
 
@@ -89,7 +89,7 @@ class TestTextBox:
 class TestCheckBox:
     def test_expansion(self, page: Page) -> None:
         """Test that the checkbox list may be expanded.
-        
+
         :param page: A Playwright browser page.
         """
         check_box_component = CheckBox(page)
@@ -97,8 +97,10 @@ class TestCheckBox:
         check_box_component.navigate()
         check_box_component.expand_all_button.click()
 
-        list_class: str = check_box_component.check_box_list.evaluate('el => el.className')
-        assert 'rct-node-expanded' in list_class
+        list_class: str = check_box_component.check_box_list.evaluate(
+            "el => el.className"
+        )
+        assert "rct-node-expanded" in list_class
 
     def test_select_check_box(self, page: Page) -> None:
         """Test that a specific checkbox may be selected.
@@ -112,14 +114,18 @@ class TestCheckBox:
         check_box_component.navigate()
         check_box_component.expand_all_button.click()
 
-        check_box: ElementHandle = check_box_component.check_box(text=check_box_text)
+        check_box: ElementHandle = check_box_component.check_box(
+            text=check_box_text
+        )
         check_box.click()
 
-        icon: ElementHandle = check_box.wait_for_selector('.rct-icon-check')
+        icon: ElementHandle = check_box.wait_for_selector(".rct-icon-check")
 
         visible: bool = icon.is_visible()
 
-        result: str = check_box_component.result_field.evaluate("el => el.innerText")
+        result: str = check_box_component.result_field.evaluate(
+            "el => el.innerText"
+        )
         assert visible and check_box_text in result
 
 

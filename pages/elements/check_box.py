@@ -13,7 +13,9 @@ class CheckBox(object):
 
     @property
     def check_box_list(self) -> ElementHandle:
-        return self.check_box_container.wait_for_selector('.rct-node.rct-node-parent')
+        return self.check_box_container.wait_for_selector(
+            ".rct-node.rct-node-parent"
+        )
 
     @property
     def collapse_all_button(self) -> ElementHandle:
@@ -29,10 +31,12 @@ class CheckBox(object):
 
     def check_box(self, text: str) -> ElementHandle:
         """Returns a checkbox element based on text.
-        
+
         :param text: The text for checkbox selection.
         """
-        return self.check_box_list.wait_for_selector(f"[for='tree-node-{text}']")
+        return self.check_box_list.wait_for_selector(
+            f"[for='tree-node-{text}']"
+        )
 
     def navigate(self) -> None:
         """Navigate to the Check Box page."""
