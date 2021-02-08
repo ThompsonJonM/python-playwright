@@ -1,12 +1,9 @@
 from playwright.sync_api._generated import ElementHandle
 
-base_url: str = "https://www.demoqa.com"
+from pages.base import Base
 
 
-class TextBox(object):
-    def __init__(self, page):
-        self.page = page
-
+class TextBox(Base):
     @property
     def user_form(self) -> ElementHandle:
         return self.page.wait_for_selector("#userForm")
@@ -43,4 +40,4 @@ class TextBox(object):
 
     def navigate(self) -> None:
         """Navigate to the Text Box page."""
-        self.page.goto(f"{base_url}/text-box")
+        self.page.goto(f"{self.base_url}/text-box")

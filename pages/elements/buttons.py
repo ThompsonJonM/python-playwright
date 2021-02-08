@@ -1,12 +1,9 @@
 from playwright.sync_api._generated import ElementHandle
 
-base_url: str = "https://www.demoqa.com"
+from pages.base import Base
 
 
-class Buttons(object):
-    def __init__(self, page):
-        self.page = page
-
+class Buttons(Base):
     @property
     def double_click_button(self) -> ElementHandle:
         return self.page.wait_for_selector("#doubleClickBtn")
@@ -21,4 +18,4 @@ class Buttons(object):
 
     def navigate(self) -> None:
         """Navigate to the Buttons page"""
-        self.page.goto(f"{base_url}/buttons")
+        self.page.goto(f"{self.base_url}/buttons")

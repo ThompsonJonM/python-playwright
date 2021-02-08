@@ -1,12 +1,9 @@
 from playwright.sync_api._generated import ElementHandle
 
-base_url: str = "https://www.demoqa.com"
+from pages.base import Base
 
 
-class CheckBox(object):
-    def __init__(self, page):
-        self.page = page
-
+class CheckBox(Base):
     @property
     def check_box_container(self) -> ElementHandle:
         return self.page.wait_for_selector(".react-checkbox-tree")
@@ -40,4 +37,4 @@ class CheckBox(object):
 
     def navigate(self) -> None:
         """Navigate to the Check Box page."""
-        self.page.goto(f"{base_url}/checkbox")
+        self.page.goto(f"{self.base_url}/checkbox")
