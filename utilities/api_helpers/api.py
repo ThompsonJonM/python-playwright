@@ -18,7 +18,7 @@ class API(object):
         tries: int = 10
 
         while True:
-            tries = -1
+            tries -= 1
 
             sleep(random())
             response: Response = requests.post(url=_url, data=_data)
