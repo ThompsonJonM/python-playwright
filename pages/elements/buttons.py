@@ -17,5 +17,5 @@ class Buttons(Base):
         return self.page.wait_for_selector('button >> text="Click Me"')
 
     def navigate(self) -> None:
-        """Navigate to the Buttons page"""
+        """Navigate to the Buttons page."""
         self.page.goto(f"{self.base_url}/buttons")
