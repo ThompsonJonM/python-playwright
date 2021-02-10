@@ -1,9 +1,13 @@
 [tool.pytest.ini_options]
 markers = [
     "asyncio: Asynchronous tests",
+    "authentication: Authentication tests",
+    "books: Books page tests",
+    "bookstore: Bookstore application tests",
+    "buttons: Buttons component tests",
+    "check_box: Check Box component tests",
     "elements: Elements page tests",
     "text_box: Text Box component tests",
-    "buttons: Buttons component tests",
 ]
 
 [tool.black]

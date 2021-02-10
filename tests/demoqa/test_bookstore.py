@@ -40,8 +40,10 @@ class TestBooks:
             "**/BookStore/v1/Books",
             lambda route: route.fulfill(path="./data/books.json"),
         )
+       
+        with page.expect_response("**/BookStore/v1/Books") as response:
+            books_page.navigate()
 
-        books_page.navigate()
         visible: bool = books_page.book(title=book_title).is_visible()
 
-        assert visible
+        assert visible and response.value.ok
