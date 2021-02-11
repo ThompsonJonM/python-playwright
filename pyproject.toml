@@ -4,10 +4,12 @@ markers = [
     "authentication: Authentication tests",
     "books: Books page tests",
     "bookstore: Bookstore application tests",
+    "browser_windows: Browser Windows component tests",
     "buttons: Buttons component tests",
     "check_box: Check Box component tests",
     "elements: Elements page tests",
     "text_box: Text Box component tests",
+    "windows: Windows page tests"
 ]
 
 [tool.black]
