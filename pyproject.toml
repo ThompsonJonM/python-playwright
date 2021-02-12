@@ -8,6 +8,8 @@ markers = [
     "buttons: Buttons component tests",
     "check_box: Check Box component tests",
     "elements: Elements page tests",
+    "frames: Frames component tests",
+    "nested_frames: Nested Frames component tests",
     "text_box: Text Box component tests",
     "windows: Windows page tests"
 ]

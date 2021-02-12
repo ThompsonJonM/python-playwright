@@ -6,3 +6,4 @@ from pages.elements.check_box import CheckBox
 from pages.elements.text_box import TextBox
 from pages.windows.browser_windows import BrowserWindows
 from pages.windows.frames import Frames
+from pages.windows.nested_frames import NestedFrames

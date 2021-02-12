@@ -3,7 +3,7 @@ from playwright.sync_api import Page
 from playwright.sync_api._generated import ElementHandle
 from pytest import fixture
 
-from pages import BrowserWindows, Frames
+from pages import BrowserWindows, Frames, NestedFrames
 
 
 @pytest.mark.browser_windows
@@ -44,5 +44,24 @@ class TestFrames:
         heading: ElementHandle = frames.heading(frames.frame_one)
         visible: bool = heading.is_visible()
         text: str = heading.inner_text()
+
+        assert visible and iframe_text in text
+
+
+@pytest.mark.nested_frames
+@pytest.mark.windows
+class TestNestedFrames:
+    def test_child_frame(self, page: Page) -> None:
+        """Test that a child frame may be located.
+
+        :param page: A Playwright browser page.
+        """
+        iframe_text: str = "Child Iframe"
+        nested_frames: NestedFrames = NestedFrames(page)
+        nested_frames.navigate()
+
+        body: ElementHandle = nested_frames.child_frame.wait_for_selector("p")
+        visible: bool = body.is_visible()
+        text: str = body.inner_text()
 
         assert visible and iframe_text in text
