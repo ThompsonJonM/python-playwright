@@ -28,6 +28,26 @@ class TestBrowserWindows:
 
         assert visible and window_text in text
 
+    @pytest.mark.tab
+    def test_new_browser_tab(self, page: Page) -> None:
+        """Test that a new window may be opened.
+
+        :param page: A Playwright browser page.
+        """
+        window_text: str = "This is a sample page"
+        browser_windows: BrowserWindows = BrowserWindows(page)
+        browser_windows.navigate()
+
+        with page.context.expect_page() as window:
+            browser_windows.tab_button.click()
+
+        new_tab: Page = window.value
+        heading: ElementHandle = new_tab.wait_for_selector("#sampleHeading")
+        visible: bool = heading.is_visible()
+        text: str = heading.inner_text()
+
+        assert visible and window_text in text
+
 
 @pytest.mark.frames
 @pytest.mark.windows
