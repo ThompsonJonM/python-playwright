@@ -9,6 +9,7 @@ base_url: str = "https://www.demoqa.com"
 
 
 @pytest.mark.elements
+@pytest.mark.base
 class TestBase:
     def test_visit_elements_page(self, page: Page) -> None:
         """Test that the Elements page can be navigated to.

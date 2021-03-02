@@ -2,6 +2,7 @@
 markers = [
     "asyncio: Asynchronous tests",
     "authentication: Authentication tests",
+    "base: Base page tests",
     "books: Books page tests",
     "bookstore: Bookstore application tests",
     "browser_windows: Browser Windows component tests",

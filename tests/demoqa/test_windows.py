@@ -28,7 +28,6 @@ class TestBrowserWindows:
 
         assert visible and window_text in text
 
-    @pytest.mark.tab
     def test_new_browser_tab(self, page: Page) -> None:
         """Test that a new window may be opened.
 

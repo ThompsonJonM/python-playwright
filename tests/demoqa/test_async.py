@@ -7,7 +7,6 @@ base_url: str = "https://www.demoqa.com"
 
 
 @pytest.mark.asyncio
-@pytest.mark.elements
 class TestBase:
     async def test_visit_elements_page(self) -> None:
         """Test that the Elements page can be navigated to.
@@ -45,8 +44,6 @@ class TestBase:
 
 
 @pytest.mark.asyncio
-@pytest.mark.elements
-@pytest.mark.text_box
 class TestTextBox:
     user: dict = {
         "name": "Test Tester",
@@ -123,8 +120,6 @@ class TestTextBox:
 
 
 @pytest.mark.asyncio
-@pytest.mark.elements
-@pytest.mark.buttons
 class TestButtons:
     @pytest.mark.parametrize(
         "button_type",
